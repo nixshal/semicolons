@@ -2,10 +2,15 @@ import streamlit as st
 import pandas as pd
 from io import BytesIO
 
+# set up the page to use the full page width
+st.set_page_config(layout="wide")
+
 
 # Function to convert an Excel file to CSV with semicolon delimiter
 def convert_excel_to_csv(excel_file):
-    excel_data = pd.read_excel(excel_file,dtype=str).dropna(how="all")  # Remove empty rows
+    excel_data = pd.read_excel(excel_file, dtype=str).dropna(
+        how="all"
+    )  # Remove empty rows
     csv_buffer = BytesIO()
     excel_data.to_csv(csv_buffer, sep=";", index=False)
     csv_buffer.seek(0)
@@ -16,11 +21,15 @@ def convert_excel_to_csv(excel_file):
 st.subheader("Excel to CSV (semicolon delimiter)")
 
 # File uploader for a single file
-uploaded_file = st.file_uploader(label="Upload Excel file after manual edits are done.", type="xlsx")
+uploaded_file = st.file_uploader(
+    label="For Kuna to upload Excel file after manual additions are completed.",
+    type="xlsx",
+    label_visibility="visible",
+)
 
 # Display the file as a DataFrame and convert to CSV
 if uploaded_file:
-    df = pd.read_excel(uploaded_file,dtype=str)
+    df = pd.read_excel(uploaded_file, dtype=str)
     st.write(f"{uploaded_file.name} data:")
     st.write(df)
 
@@ -45,6 +54,3 @@ if uploaded_file:
         type="primary",
         use_container_width=True,
     )
-
-else:
-    st.write("Please upload an Excel file to convert.")
