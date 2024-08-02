@@ -16,7 +16,7 @@ def convert_excel_to_csv(excel_file):
 st.subheader("Excel to CSV (semicolon delimiter)")
 
 # File uploader for a single file
-uploaded_file = st.file_uploader(label="Upload Excel file", type="xlsx")
+uploaded_file = st.file_uploader(label="Upload Excel file after manual edits are done.", type="xlsx")
 
 # Display the file as a DataFrame and convert to CSV
 if uploaded_file:
